@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EBook Business</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#f5f5f5;
+color:#222;
+transition:.4s;
+}
+
+body.dark{
+background:#111;
+color:white;
+}
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:#0d6efd;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 60px;
+z-index:1000;
+}
+
+header h2{
+color:white;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:15px;
+font-weight:bold;
+}
+
+nav a:hover{
+color:yellow;
+}
+
+button{
+cursor:pointer;
+}
+
+.toggle{
+background:white;
+color:#0d6efd;
+border:none;
+padding:8px 15px;
+border-radius:30px;
+font-weight:bold;
+}
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+background:linear-gradient(135deg,#0d6efd,#6610f2);
+color:white;
+}
+
+.hero h1{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.hero button{
+padding:15px 40px;
+border:none;
+background:yellow;
+font-size:18px;
+border-radius:30px;
+}
+
+section{
+padding:100px 60px;
+}
+
+.title{
+text-align:center;
+margin-bottom:50px;
+font-size:40px;
+color:#0d6efd;
+}
+
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+border-radius:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+transition:.4s;
+}
+
+.dark .card{
+background:#222;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.price{
+font-size:28px;
+color:#0d6efd;
+margin-top:15px;
+}
+
+.buy{
+margin-top:15px;
+padding:10px 25px;
+background:#0d6efd;
+color:white;
+border:none;
+border-radius:25px;
+}
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.plan{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.dark .plan{
+background:#222;
+}
+
+.plan h2{
+margin-bottom:20px;
+}
+
+.plan h1{
+font-size:45px;
+color:#0d6efd;
+}
+
+.plan ul{
+list-style:none;
+margin:20px 0;
+}
+
+.plan li{
+padding:10px;
+}
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.testimonial{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.dark .testimonial{
+background:#222;
+}
+
+.faq details{
+background:white;
+margin:15px 0;
+padding:20px;
+border-radius:10px;
+}
+
+.dark details{
+background:#222;
+}
+
+.contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+input,textarea{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+textarea{
+height:150px;
+}
+
+.send{
+background:#0d6efd;
+color:white;
+border:none;
+padding:15px;
+border-radius:30px;
+width:100%;
+}
+
+footer{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:30px;
+}
+
+@media(max-width:768px){
+
+header{
+padding:15px;
+flex-direction:column;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+.about,
+.contact{
+grid-template-columns:1fr;
+}
+
+section{
+padding:80px 20px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<h2>EBook Business</h2>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#books">Books</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<button class="toggle" onclick="darkMode()">🌙</button>
+
+</header>
+
+<section class="hero" id="home">
+
+<div>
+
+<h1>Sell Digital E-Books Online</h1>
+
+<p>Create your online bookstore and grow your digital business.</p>
+
+<button>Start Now</button>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h1 class="title">About Us</h1>
+
+<div class="about">
+
+<img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
+
+<div>
+
+<h2>Professional EBook Store</h2>
+
+<br>
+
+<p>
+
+We help authors and entrepreneurs sell digital books online using a modern website.
+
+</p>
+
+<br>
+
+<p>
+
+Secure payments, instant downloads, responsive design, and beautiful user experience.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="books">
+
+<h1 class="title">Featured Books</h1>
+
+<div class="cards">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f">
+
+<h2>Business Secrets</h2>
+
+<p>Learn how to build a profitable business.</p>
+
+<div class="price">$15</div>
+
+<button class="buy">Buy Now</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353">
+
+<h2>Marketing Guide</h2>
+
+<p>Complete online marketing strategies.</p>
+
+<div class="price">$20</div>
+
+<button class="buy">Buy Now</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc">
+
+<h2>Programming</h2>
+
+<p>HTML CSS JavaScript Full Guide.</p>
+
+<div class="price">$18</div>
+
+<button class="buy">Buy Now</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="pricing">
+
+<h1 class="title">Pricing</h1>
+
+<div class="pricing">
+
+<div class="plan">
+
+<h2>Starter</h2>
+
+<h1>$29</h1>
+
+<ul>
+
+<li>5 Books</li>
+
+<li>Email Support</li>
+
+<li>Download</li>
+
+</ul>
+
+<button class="buy">Choose</button>
+
+</div>
+
+<div class="plan">
+
+<h2>Pro</h2>
+
+<h1>$59</h1>
+
+<ul>
+
+<li>Unlimited Books</li>
+
+<li>Priority Support</li>
+
+<li>Analytics</li>
+
+</ul>
+
+<button class="buy">Choose</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h1 class="title">Testimonials</h1>
+
+<div class="testimonials">
+
+<div class="testimonial">
+
+<h3>Ahmed</h3>
+
+<p>
+
+Amazing website! I sold hundreds of ebooks.
+
+</p>
+
+</div>
+
+<div class="testimonial">
+
+<h3>Fatima</h3>
+
+<p>
+
+Very modern design and easy to use.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h1 class="title">FAQ</h1>
+
+<div class="faq">
+
+<details>
+
+<summary>How do I buy?</summary>
+
+<p>Click Buy Now and complete payment.</p>
+
+</details>
+
+<details>
+
+<summary>Instant Download?</summary>
+
+<p>Yes after payment.</p>
+
+</details>
+
+<details>
+
+<summary>Mobile Friendly?</summary>
+
+<p>Yes fully responsive.</p>
+
+</details>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h1 class="title">Contact</h1>
+
+<div class="contact">
+
+<div>
+
+<h2>Get In Touch</h2>
+
+<p>Email: info@ebook.com</p>
+
+<p>Phone: +252 000000000</p>
+
+<p>Address: Somalia</p>
+
+</div>
+
+<div>
+
+<input placeholder="Your Name">
+
+<input placeholder="Email">
+
+<textarea placeholder="Message"></textarea>
+
+<button class="send" onclick="sendMessage()">Send Message</button>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>© 2026 EBook Business. All Rights Reserved.</h3>
+
+</footer>
+
+<script>
+
+function darkMode(){
+
+document.body.classList.toggle("dark");
+
+}
+
+function sendMessage(){
+
+alert("Message Sent Successfully!");
+
+}
+
+const cards=document.querySelectorAll(".card");
+
+window.addEventListener("scroll",()=>{
+
+cards.forEach(card=>{
+
+const top=card.getBoundingClientRect().top;
+
+if(top<window.innerHeight-50){
+
+card.style.opacity="1";
+card.style.transform="translateY(0px)";
+
+}else{
+
+card.style.opacity="0";
+card.style.transform="translateY(100px)";
+
+}
+
+});
+
+});
+
+cards.forEach(card=>{
+
+card.style.opacity="0";
+card.style.transition=".8s";
+
+});
+
+</script>
+
+</body>
+</html>
