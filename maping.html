@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUXE — Checkout</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#0b0b0f;
+    --card:#14141a;
+    --card2:#191920;
+    --gold:#d9b56d;
+    --gold2:#f1d08d;
+    --text:#f7f5ef;
+    --muted:#92929d;
+    --line:#292932;
+    --green:#67d69a;
+    --red:#ff6b6b;
+}
+
+body{
+    background:
+        radial-gradient(circle at 10% 10%, rgba(217,181,109,.09), transparent 28%),
+        radial-gradient(circle at 90% 80%, rgba(99,91,255,.08), transparent 30%),
+        var(--bg);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    min-height:100vh;
+}
+
+/* ================= NAV ================= */
+
+.navbar{
+    height:82px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(11,11,15,.8);
+    backdrop-filter:blur(20px);
+}
+
+.brand{
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    letter-spacing:2px;
+}
+
+.brand span{
+    color:var(--gold);
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.secure{
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+/* ================= MAIN ================= */
+
+.wrapper{
+    width:min(1250px,92%);
+    margin:55px auto;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:38px;
+}
+
+.heading h1{
+    font-family:'Playfair Display',serif;
+    font-size:48px;
+    font-weight:600;
+    letter-spacing:-1px;
+}
+
+.heading p{
+    color:var(--muted);
+    margin-top:8px;
+}
+
+.steps{
+    display:flex;
+    gap:25px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.step{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.step.active{
+    color:var(--gold2);
+}
+
+.circle{
+    width:25px;
+    height:25px;
+    border:1px solid #454550;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+}
+
+.active .circle{
+    background:var(--gold);
+    color:#111;
+    border-color:var(--gold);
+}
+
+/* ================= GRID ================= */
+
+.checkout{
+    display:grid;
+    grid-template-columns:1.5fr .85fr;
+    gap:25px;
+}
+
+.box{
+    background:linear-gradient(145deg,#15151b,#111116);
+    border:1px solid var(--line);
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.box + .box{
+    margin-top:20px;
+}
+
+.box-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.box-title h2{
+    font-family:'Playfair Display',serif;
+    font-size:23px;
+    font-weight:600;
+}
+
+.box-title span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* ================= FORM ================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field{
+    position:relative;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    color:#b9b9c2;
+    margin-bottom:8px;
+}
+
+input,select{
+    width:100%;
+    height:53px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#0e0e13;
+    color:#fff;
+    padding:0 15px;
+    outline:none;
+    transition:.25s;
+    font-size:14px;
+}
+
+select option{
+    background:#15151b;
+}
+
+input:focus,select:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(217,181,109,.08);
+}
+
+/* ================= PAYMENT ================= */
+
+.payment-methods{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.method{
+    height:55px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    cursor:pointer;
+    color:#aaa;
+    font-size:13px;
+    transition:.2s;
+}
+
+.method:hover{
+    border-color:#555560;
+}
+
+.method.selected{
+    border-color:var(--gold);
+    background:rgba(217,181,109,.06);
+    color:var(--gold2);
+}
+
+.card-number{
+    position:relative;
+}
+
+.card-icon{
+    position:absolute;
+    right:15px;
+    top:39px;
+    font-size:17px;
+}
+
+/* ================= SUMMARY ================= */
+
+.summary{
+    position:sticky;
+    top:25px;
+}
+
+.summary-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.summary-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:25px;
+}
+
+.item-count{
+    color:var(--gold);
+    font-size:12px;
+}
+
+.product{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.product-image{
+    width:70px;
+    height:70px;
+    border-radius:15px;
+    background:
+        linear-gradient(135deg,#292933,#101015);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:31px;
+    border:1px solid #30303a;
+}
+
+.product-details{
+    flex:1;
+}
+
+.product-details h3{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.product-details small{
+    color:var(--muted);
+}
+
+.product-price{
+    text-align:right;
+    font-weight:600;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:9px;
+}
+
+.quantity button{
+    width:23px;
+    height:23px;
+    background:#202028;
+    border:1px solid #34343e;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.quantity span{
+    font-size:12px;
+    min-width:14px;
+    text-align:center;
+}
+
+.remove{
+    color:var(--red);
+    cursor:pointer;
+    font-size:11px;
+    margin-left:5px;
+}
+
+.coupon{
+    display:flex;
+    gap:8px;
+    margin:22px 0;
+}
+
+.coupon input{
+    height:45px;
+}
+
+.coupon button{
+    border:1px solid var(--gold);
+    color:var(--gold);
+    background:transparent;
+    padding:0 16px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.line{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:13px;
+    margin:14px 0;
+}
+
+.line strong{
+    color:#eee;
+}
+
+.total{
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    margin-top:20px;
+}
+
+.total strong{
+    color:var(--gold2);
+    font-size:26px;
+}
+
+/* ================= BUTTON ================= */
+
+.order-btn{
+    width:100%;
+    height:58px;
+    border:0;
+    border-radius:13px;
+    margin-top:23px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#111;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.order-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(217,181,109,.2);
+}
+
+.guarantee{
+    text-align:center;
+    color:#6e6e78;
+    font-size:11px;
+    margin-top:17px;
+}
+
+/* ================= MODAL ================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+
+.overlay.show{
+    display:flex;
+}
+
+.success{
+    width:min(430px,90%);
+    background:#16161d;
+    border:1px solid #33333d;
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    animation:show .35s ease;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.success-icon{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:rgba(103,214,154,.1);
+    border:1px solid rgba(103,214,154,.4);
+    color:var(--green);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+    margin:auto auto 20px;
+}
+
+.success h2{
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.success p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:13px;
+}
+
+.done{
+    margin-top:25px;
+    width:100%;
+    height:50px;
+    background:var(--gold);
+    color:#111;
+    border:0;
+    border-radius:11px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .checkout{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        position:static;
+    }
+
+    .top{
+        display:block;
+    }
+
+    .steps{
+        margin-top:25px;
+    }
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:0 5%;
+    }
+
+    .nav-right{
+        display:none;
+    }
+
+    .wrapper{
+        width:94%;
+        margin:30px auto;
+    }
+
+    .heading h1{
+        font-size:36px;
+    }
+
+    .box{
+        padding:20px;
+        border-radius:19px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .payment-methods{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        gap:10px;
+        font-size:11px;
+    }
+
+    .step:not(.active){
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <div class="brand">
+        LUXE<span>.</span>
+    </div>
+
+    <div class="nav-right">
+        <div class="secure">
+            🔒 Secure checkout
+        </div>
+
+        <div>
+            Support
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="wrapper">
+
+    <!-- TOP -->
+    <div class="top">
+
+        <div class="heading">
+            <h1>Checkout</h1>
+            <p>Complete your order and enjoy your purchase.</p>
+        </div>
+
+        <div class="steps">
+
+            <div class="step active">
+                <div class="circle">✓</div>
+                Cart
+            </div>
+
+            <div class="step active">
+                <div class="circle">2</div>
+                Checkout
+            </div>
+
+            <div class="step">
+                <div class="circle">3</div>
+                Complete
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section class="checkout">
+
+        <!-- LEFT -->
+        <div>
+
+            <!-- CONTACT -->
+            <div class="box">
+
+                <div class="box-title">
+                    <h2>Personal details</h2>
+                    <span>Required</span>
+                </div>
+
+                <div class="grid">
+
+                    <div class="field">
+                        <label>First name</label>
+                        <input id="firstName" placeholder="Ahmed">
+                    </div>
+
+                    <div class="field">
+                        <label>Last name</label>
+                        <input id="lastName" placeholder="Ali">
+                    </div>
+
+                    <div class="field full">
+                        <label>Email address</label>
+                        <input id="email" type="email" placeholder="ahmed@example.com">
+                    </div>
+
+                    <div class="field full">
+                        <label>Phone number</label>
+                        <input id="phone" placeholder="+252 63 0000000">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ADDRESS -->
+            <div class="box">
+
+                <div class="box-title">
+                    <h2>Delivery address</h2>
+                    <span>Where should we deliver?</span>
+                </div>
+
+                <div class="grid">
+
+                    <div class="field full">
+                        <label>Street address</label>
+                        <input id="address" placeholder="Enter your street address">
+                    </div>
+
+                    <div class="field">
+                        <label>City</label>
+                        <input id="city" placeholder="Garowe">
+                    </div>
+
+                    <div class="field">
+                        <label>Country</label>
+                        <select id="country">
+                            <option value="">Choose country</option>
+                            <option>Somalia</option>
+                            <option>Kenya</option>
+                            <option>Ethiopia</option>
+                            <option>Djibouti</option>
+                            <option>UAE</option>
+                            <option>United Kingdom</option>
+                            <option>United States</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Postal code</label>
+                        <input id="postal" placeholder="00000">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+            <div class="box">
+
+                <div class="box-title">
+                    <h2>Payment</h2>
+                    <span>100% secure</span>
+                </div>
+
+                <div class="payment-methods">
+
+                    <div class="method selected" onclick="selectPayment(this)">
+                        💳 Card
+                    </div>
+
+                    <div class="method" onclick="selectPayment(this)">
+                        🅿️ PayPal
+                    </div>
+
+                    <div class="method" onclick="selectPayment(this)">
+                         Apple Pay
+                    </div>
+
+                </div>
+
+                <div class="grid">
+
+                    <div class="field full card-number">
+                        <label>Card number</label>
+
+                        <input
+                            id="cardNumber"
+                            maxlength="19"
+                            placeholder="1234 5678 9012 3456"
+                        >
+
+                        <span class="card-icon">💳</span>
+                    </div>
+
+                    <div class="field full">
+                        <label>Cardholder name</label>
+                        <input id="cardName" placeholder="Name on card">
+                    </div>
+
+                    <div class="field">
+                        <label>Expiry date</label>
+                        <input
+                            id="expiry"
+                            maxlength="5"
+                            placeholder="MM/YY"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>CVV</label>
+                        <input
+                            id="cvv"
+                            type="password"
+                            maxlength="4"
+                            placeholder="123"
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+        <aside class="box summary">
+
+            <div class="summary-header">
+                <h2>Your order</h2>
+                <span class="item-count" id="itemCount">0 items</span>
+            </div>
+
+            <div id="products"></div>
+
+
+            <div class="coupon">
+
+                <input
+                    id="coupon"
+                    placeholder="Discount code"
+                >
+
+                <button onclick="applyCoupon()">
+                    Apply
+                </button>
+
+            </div>
+
+
+            <div class="line">
+                <span>Subtotal</span>
+                <strong id="subtotal">$0.00</strong>
+            </div>
+
+            <div class="line">
+                <span>Shipping</span>
+                <strong style="color:var(--green)">FREE</strong>
+            </div>
+
+            <div class="line">
+                <span>Discount</span>
+                <strong id="discount">$0.00</strong>
+            </div>
+
+            <div class="line total">
+                <span>Total</span>
+                <strong id="total">$0.00</strong>
+            </div>
+
+
+            <button class="order-btn" onclick="placeOrder()">
+                Place Order →
+            </button>
+
+            <div class="guarantee">
+                🔒 Your payment information is encrypted and secure.
+            </div>
+
+        </aside>
+
+    </section>
+
+</main>
+
+
+<!-- SUCCESS -->
+<div class="overlay" id="overlay">
+
+    <div class="success">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>Order confirmed</h2>
+
+        <p>
+            Thank you for shopping with LUXE.
+            Your order has been successfully received.
+        </p>
+
+        <button class="done" onclick="closeModal()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ===================================
+   CART
+=================================== */
+
+let cart = [
+
+    {
+        id:1,
+        name:"Luxury Sneakers",
+        price:120,
+        quantity:1,
+        emoji:"👟"
+    },
+
+    {
+        id:2,
+        name:"Premium Watch",
+        price:250,
+        quantity:1,
+        emoji:"⌚"
+    },
+
+    {
+        id:3,
+        name:"Leather Bag",
+        price:180,
+        quantity:2,
+        emoji:"👜"
+    }
+
+];
+
+let discount = 0;
+
+
+/* ===================================
+   RENDER CART
+=================================== */
+
+function renderCart(){
+
+    const container =
+        document.getElementById("products");
+
+    const itemCount =
+        cart.reduce((sum,item)=>sum+item.quantity,0);
+
+    document.getElementById("itemCount")
+        .textContent =
+        `${itemCount} ${itemCount === 1 ? "item":"items"}`;
+        /* how many database for your defaults */
+    if(cart.length === 0){
+
+        container.innerHTML = `
+            <div style="
+                text-align:center;
+                padding:30px 0;
+                color:#777;
+            ">
+                Your cart is empty 🛒
+            </div>
+        `;
+
+        calculateTotal();
+        return;
+    }
+
+
+    container.innerHTML = cart.map(item=>{
+
+        return `
+
+            <div class="product">
+
+                <div class="product-image">
+                    ${item.emoji}
+                </div>
+
+                <div class="product-details">
+
+                    <h3>${item.name}</h3>
+
+                    <small>
+                        $${item.price.toFixed(2)}
+                    </small>
+
+                    <div class="quantity">
+
+                        <button
+                            onclick="changeQty(${item.id},-1)">
+                            −
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            onclick="changeQty(${item.id},1)">
+                            +
+                        </button>
+
+                        <span
+                            class="remove"
+                            onclick="removeItem(${item.id})">
+                            Remove
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="product-price">
+                    $${(item.price * item.quantity).toFixed(2)}
+                </div>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+    calculateTotal();
+}
+
+
+/* ===================================
+   QUANTITY
+=================================== */
+
+function changeQty(id,amount){
+
+    const item =
+        cart.find(product=>product.id===id);
+
+    if(!item) return;
+
+    item.quantity += amount;
+
+    if(item.quantity <= 0){
+
+        cart =
+            cart.filter(product=>product.id!==id);
+
+    }
+
+    renderCart();
+}
+
+
+/* ===================================
+   REMOVE
+=================================== */
+
+function removeItem(id){
+
+    cart =
+        cart.filter(item=>item.id!==id);
+
+    renderCart();
+}
+
+
+/* ===================================
+   TOTAL
+=================================== */
+
+function calculateTotal(){
+
+    const subtotal =
+        cart.reduce(
+            (sum,item)=>
+            sum + item.price * item.quantity,
+            0
+        );
+
+    const total =
+        Math.max(0,subtotal-discount);
+
+    document.getElementById("subtotal")
+        .textContent =
+        `$${subtotal.toFixed(2)}`;
+
+    document.getElementById("discount")
+        .textContent =
+        `-$${discount.toFixed(2)}`;
+
+    document.getElementById("total")
+        .textContent =
+        `$${total.toFixed(2)}`;
+}
+
+
+/* ===================================
+   COUPON
+=================================== */
+
+function applyCoupon(){
+
+    const input =
+        document.getElementById("coupon");
+
+    const code =
+        input.value.trim().toUpperCase();
+
+    const subtotal =
+        cart.reduce(
+            (sum,item)=>
+            sum + item.price * item.quantity,
+            0
+        );
+
+
+    if(code === "LUXE10"){
+
+        discount = subtotal * .10;
+
+        alert("10% discount applied ✨");
+
+    }
+    else{
+
+        discount = 0;
+
+        if(code){
+            alert("Invalid discount code.");
+        }
+
+    }
+
+    calculateTotal();
+}
+
+
+/* ===================================
+   PAYMENT METHOD
+=================================== */
+
+function selectPayment(element){
+
+    document
+       .querySelectorAll(".method")
+        .forEach(method=>{
+            method.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+}
+
+
+/* ===================================
+   CARD FORMAT
+=================================== */
+
+document
+.getElementById("cardNumber")
+.addEventListener("input",function(){
+
+    let value =
+        this.value
+        .replace(/\D/g,"")
+        .substring(0,16);
+
+    let groups =
+        value.match(/.{1,4}/g);
+
+    this.value =
+        groups ? groups.join(" ") : "";
+
+});
+
+
+/* ===================================
+   EXPIRY
+=================================== */
+
+piry")
+.addEventListener("input",function(){
+
+    let value =
+        this.value
+        .replace(/\D/g,"")
+        .substring(0,4);
+
+    if(value.length > 2){
+
+        value =
+            value.substring(0,2)
+            + "/"
+            + value.substring(2);
+
+    }
+
+    this.value = value;
+
+});
+
+
+/* ===================================
+   PLACE ORDER
+=================================== */
+
+function placeOrder(){
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+
+    const fields = [
+
+        "firstName",
+        "lastName",
+        "email",
+        "phone",
+        "address",
+        "city",
+        "country",
+        "cardNumber",
+        "cardName",
+        "expiry",
+        "cvv"
+
+    ];
+
+    let valid = true;
+
+
+    fields.forEach(id=>{
+
+        const field =
+            document.getElementById(id);
+
+        if(!field.value.trim()){
+
+            field.style.borderColor =
+                "var(--red)";
+
+            valid = false;
+
+        }else{
+
+            field.style.borderColor =
+                "var(--line)";
+
+        }
+ 
+    });
+
+
+    if(!valid){
+
+        alert("Please complete all required fields.");
+
+        return;
+    }
+
+
+    document
+        .getElementById("overlay")
+        .classList.add("show");
+
+}
+
+
+/* ===================================
+   CLOSE MODAL
+=================================== */
+
+function closeModal(){
+
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
+
+}
+
+
+/* ===================================
+   INIT
+=================================== */
+
+renderCart();
+
+</script>
+
+</body>
+</html>
