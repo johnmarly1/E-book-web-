@@ -208,7 +208,7 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:30px;
 }
-
+/*changing the testimonial clone */
 .testimonial{
 background:white;
 padding:30px;
@@ -316,7 +316,7 @@ padding:80px 20px;
 
 <p>Create your online bookstore and grow your digital business.</p>
 
-<button>Start Now</button>
+<button><a href="carts.html"> Start Now</a></button>
 
 </div>
 
@@ -372,7 +372,7 @@ Secure payments, instant downloads, responsive design, and beautiful user experi
 
 <div class="price">$15</div>
 
-<button class="buy">Buy Now</button>
+<button class="buy"><a href="carts.html">Buy Now</a></button>
 
 </div>
 
@@ -573,12 +573,17 @@ function darkMode(){
 document.body.classList.toggle("dark");
 
 }
+// making some functions and roots to sellect all 
 
 function sendMessage(){
 
 alert("Message Sent Successfully!");
 
 }
+function cali (){
+    console.log("welcome to our library ");
+}
+cali();
 
 const cards=document.querySelectorAll(".card");
 
