@@ -915,7 +915,8 @@ function renderCart(){
     document.getElementById("itemCount")
         .textContent =
         `${itemCount} ${itemCount === 1 ? "item":"items"}`;
-        /* how many database for your defaults */
+
+
     if(cart.length === 0){
 
         container.innerHTML = `
@@ -1192,9 +1193,9 @@ function placeOrder(){
         "cvv"
 
     ];
-
+// adding variables 
     let valid = true;
-
+// adding forEach array 
 
     fields.forEach(id=>{
 
