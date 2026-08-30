@@ -1,622 +1,1192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookVerse | Premium E-Book Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --panel-2: #edf3ff;
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --secondary: #14b8a6;
+      --text: #172033;
+      --muted: #62708b;
+      --line: rgba(23, 32, 51, 0.09);
+      --shadow: 0 18px 45px rgba(79, 70, 229, 0.12);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --accent: #f8fafc;
+    }
 
-<title>EBook Business</title>
+    body.dark {
+      --bg: #0b1120;
+      --panel: #111827;
+      --panel-2: #172033;
+      --primary: #8b5cf6;
+      --primary-dark: #6d28d9;
+      --secondary: #2dd4bf;
+      --text: #eef2ff;
+      --muted: #a7b3c7;
+      --line: rgba(255, 255, 255, 0.08);
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.5);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --accent: #0f172a;
+    }
 
-<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-html{
-scroll-behavior:smooth;
-}
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, #eef4ff 100%);
+      color: var(--text);
+      transition: background 0.25s ease, color 0.25s ease;
+    }
 
-body{
-background:#f5f5f5;
-color:#222;
-transition:.4s;
-}
+    body.dark {
+      background: linear-gradient(180deg, var(--bg) 0%, #111827 100%);
+    }
 
-body.dark{
-background:#111;
-color:white;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-background:#0d6efd;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 60px;
-z-index:1000;
-}
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-header h2{
-color:white;
-}
+    button {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
 
-nav a{
-color:white;
-text-decoration:none;
-margin:15px;
-font-weight:bold;
-}
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-nav a:hover{
-color:yellow;
-}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
 
-button{
-cursor:pointer;
-}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 18px;
+    }
 
-.toggle{
-background:white;
-color:#0d6efd;
-border:none;
-padding:8px 15px;
-border-radius:30px;
-font-weight:bold;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.02em;
+    }
 
-.hero{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:30px;
-background:linear-gradient(135deg,#0d6efd,#6610f2);
-color:white;
-}
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+    }
 
-.hero h1{
-font-size:60px;
-margin-bottom:20px;
-}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.96rem;
+    }
 
-.hero p{
-font-size:20px;
-margin-bottom:30px;
-}
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
 
-.hero button{
-padding:15px 40px;
-border:none;
-background:yellow;
-font-size:18px;
-border-radius:30px;
-}
+    .nav-links a:hover {
+      color: #fff;
+    }
 
-section{
-padding:100px 60px;
-}
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.title{
-text-align:center;
-margin-bottom:50px;
-font-size:40px;
-color:#0d6efd;
-}
+    .cart-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 110px;
+      height: 40px;
+      border-radius: 999px;
+      padding: 0 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: white;
+      font-weight: 600;
+    }
 
-.about{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-align-items:center;
-}
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 1.05rem;
+    }
 
-.about img{
-width:100%;
-border-radius:20px;
-}
+    .hero {
+      padding: 76px 0 64px;
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.18), transparent 30%),
+        linear-gradient(135deg, #0f172a 0%, #1d4ed8 40%, #312e81 100%);
+      color: white;
+    }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: 36px;
+    }
 
-.card{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,.1);
-transition:.4s;
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
 
-.dark .card{
-background:#222;
-}
+    h1 {
+      font-size: clamp(2.65rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+    }
 
-.card:hover{
-transform:translateY(-10px);
-}
+    .hero-copy p {
+      max-width: 620px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
 
-.card img{
-width:100%;
-height:250px;
-object-fit:cover;
-border-radius:10px;
-}
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
 
-.price{
-font-size:28px;
-color:#0d6efd;
-margin-top:15px;
-}
+    .primary-btn,
+    .secondary-btn,
+    .purchase-btn,
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
 
-.buy{
-margin-top:15px;
-padding:10px 25px;
-background:#0d6efd;
-color:white;
-border:none;
-border-radius:25px;
-}
+    .primary-btn,
+    .purchase-btn {
+      padding: 15px 26px;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 14px 34px rgba(20, 184, 166, 0.3);
+    }
 
-.pricing{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
+    .secondary-btn,
+    .ghost-btn {
+      padding: 15px 24px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: white;
+    }
 
-.plan{
-background:white;
-padding:30px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 10px 20px rgba(0,0,0,.1);
-}
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .purchase-btn:hover,
+    .ghost-btn:hover {
+      transform: translateY(-1px);
+    }
 
-.dark .plan{
-background:#222;
-}
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 18px;
+      margin-top: 26px;
+    }
 
-.plan h2{
-margin-bottom:20px;
-}
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px 16px;
+      text-align: center;
+    }
 
-.plan h1{
-font-size:45px;
-color:#0d6efd;
-}
+    .stat-card strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 5px;
+    }
 
-.plan ul{
-list-style:none;
-margin:20px 0;
-}
+    .stat-card span {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.8rem;
+    }
 
-.plan li{
-padding:10px;
-}
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 420px;
+    }
 
-.testimonials{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-}
-/*changing the testimonial clone */
-.testimonial{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 20px rgba(0,0,0,.1);
-}
+    .book-cube {
+      width: min(100%, 440px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.42);
+      padding: 26px;
+      backdrop-filter: blur(12px);
+    }
 
-.dark .testimonial{
-background:#222;
-}
+    .book-window {
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 18px;
+    }
 
-.faq details{
-background:white;
-margin:15px 0;
-padding:20px;
-border-radius:10px;
-}
+    .book-cover-large {
+      min-height: 220px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #facc15 0%, #f97316 35%, #4338ca 100%);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 36px rgba(15, 23, 42, 0.18);
+    }
 
-.dark details{
-background:#222;
-}
+    .book-cover-large::before {
+      content: "";
+      position: absolute;
+      inset: 12px 18px 12px 18px;
+      border: 1px solid rgba(255,255,255,0.48);
+      border-radius: 14px;
+    }
 
-.contact{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-}
+    .book-cover-large span {
+      position: relative;
+      z-index: 1;
+      font-size: 4rem;
+      filter: drop-shadow(0 8px 18px rgba(15, 23, 42, 0.28));
+    }
 
-input,textarea{
-width:100%;
-padding:15px;
-margin:10px 0;
-border:1px solid #ccc;
-border-radius:10px;
-}
+    .mini-card {
+      position: absolute;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      padding: 12px 14px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.24);
+    }
 
-textarea{
-height:150px;
-}
+    .mini-card:first-of-type {
+      top: 22px;
+      right: 12px;
+      transform: rotate(8deg);
+    }
 
-.send{
-background:#0d6efd;
-color:white;
-border:none;
-padding:15px;
-border-radius:30px;
-width:100%;
-}
+    .mini-card:last-of-type {
+      left: 14px;
+      bottom: 22px;
+      transform: rotate(-8deg);
+    }
 
-footer{
-background:#0d6efd;
-color:white;
-text-align:center;
-padding:30px;
-}
+    .mini-card strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 3px;
+    }
 
-@media(max-width:768px){
+    .mini-card span {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.8);
+    }
 
-header{
-padding:15px;
-flex-direction:column;
-}
+    .section {
+      padding: 92px 0;
+    }
 
-.hero h1{
-font-size:40px;
-}
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
 
-.about,
-.contact{
-grid-template-columns:1fr;
-}
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.06em;
+    }
 
-section{
-padding:80px 20px;
-}
+    .section-head p {
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
 
-}
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
 
-</style>
+    .book-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
 
+    .book-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(79, 70, 229, 0.22);
+    }
+
+    .book-cover {
+      position: relative;
+      min-height: 230px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 4rem;
+      background: linear-gradient(135deg, #1d4ed8, #7c3aed, #14b8a6);
+    }
+
+    .book-cover::after {
+      content: "";
+      position: absolute;
+      inset: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.38);
+    }
+
+    .book-body {
+      padding: 20px 18px 18px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag {
+      background: rgba(79, 70, 229, 0.08);
+      color: var(--primary);
+      padding: 6px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .book-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+    }
+
+    .book-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      min-height: 64px;
+    }
+
+    .book-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .price {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .buy-btn {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      min-width: 110px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .buy-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .feature-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-box .icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.18), rgba(20, 184, 166, 0.18));
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+    }
+
+    .feature-box h3 {
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+    }
+
+    .feature-box p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .plan {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan.popular {
+      border-color: rgba(79, 70, 229, 0.28);
+      transform: scale(1.02);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: white;
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .plan h3 {
+      font-size: 1.28rem;
+      margin-bottom: 18px;
+    }
+
+    .plan .price {
+      font-size: 2.3rem;
+      margin-bottom: 12px;
+    }
+
+    .plan .period {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .plan ul {
+      list-style: none;
+      margin: 22px 0 24px;
+    }
+
+    .plan li {
+      color: var(--muted);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .plan li:last-child {
+      border-bottom: none;
+    }
+
+    .plan .ghost-btn {
+      width: 100%;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stars {
+      color: #fbbf24;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+
+    .testimonial p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+
+    .person strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .person span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-info {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      border-radius: 22px;
+      padding: 28px 24px;
+      color: white;
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-info p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 18px;
+      line-height: 1.8;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: var(--accent);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(79, 70, 229, 0.5);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.08);
+    }
+
+    .purchase-btn {
+      width: fit-content;
+      margin-top: 8px;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      background: rgba(15, 23, 42, 0.96);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 18px 24px rgba(15, 23, 42, 0.25);
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .contact-wrap,
+      .book-grid,
+      .features-grid,
+      .pricing-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .book-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-head {
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero-grid,
+      .book-grid,
+      .features-grid,
+      .pricing-grid,
+      .testimonials-grid,
+      .contact-wrap,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-
-<h2>EBook Business</h2>
-
-<nav>
-<a href="#home">Home</a>
-<a href="#about">About</a>
-<a href="#books">Books</a>
-<a href="#pricing">Pricing</a>
-<a href="#contact">Contact</a>
-</nav>
-
-<button class="toggle" onclick="darkMode()">🌙</button>
-
-</header>
-
-<section class="hero" id="home">
-
-<div>
-
-<h1>Sell Digital E-Books Online</h1>
-
-<p>Create your online bookstore and grow your digital business.</p>
-
-<button><a href="carts.html"> Start Now</a></button>
-
-</div>
-
-</section>
-
-<section id="about">
-
-<h1 class="title">About Us</h1>
-
-<div class="about">
-
-<img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
-
-<div>
-
-<h2>Professional EBook Store</h2>
-
-<br>
-
-<p>
-
-We help authors and entrepreneurs sell digital books online using a modern website.
-
-</p>
-
-<br>
-
-<p>
-
-Secure payments, instant downloads, responsive design, and beautiful user experience.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="books">
-
-<h1 class="title">Featured Books</h1>
-
-<div class="cards">
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f">
-
-<h2>Business Secrets</h2>
-
-<p>Learn how to build a profitable business.</p>
-
-<div class="price">$15</div>
-
-<button class="buy"><a href="carts.html">Buy Now</a></button>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353">
-
-<h2>Marketing Guide</h2>
-
-<p>Complete online marketing strategies.</p>
-
-<div class="price">$20</div>
-
-<button class="buy">Buy Now</button>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc">
-
-<h2>Programming</h2>
-
-<p>HTML CSS JavaScript Full Guide.</p>
-
-<div class="price">$18</div>
-
-<button class="buy">Buy Now</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="pricing">
-
-<h1 class="title">Pricing</h1>
-
-<div class="pricing">
-
-<div class="plan">
-
-<h2>Starter</h2>
-
-<h1>$29</h1>
-
-<ul>
-
-<li>5 Books</li>
-
-<li>Email Support</li>
-
-<li>Download</li>
-
-</ul>
-
-<button class="buy">Choose</button>
-
-</div>
-
-<div class="plan">
-
-<h2>Pro</h2>
-
-<h1>$59</h1>
-
-<ul>
-
-<li>Unlimited Books</li>
-
-<li>Priority Support</li>
-
-<li>Analytics</li>
-
-</ul>
-
-<button class="buy">Choose</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h1 class="title">Testimonials</h1>
-
-<div class="testimonials">
-
-<div class="testimonial">
-
-<h3>Ahmed</h3>
-
-<p>
-
-Amazing website! I sold hundreds of ebooks.
-
-</p>
-
-</div>
-
-<div class="testimonial">
-
-<h3>Fatima</h3>
-
-<p>
-
-Very modern design and easy to use.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h1 class="title">FAQ</h1>
-
-<div class="faq">
-
-<details>
-
-<summary>How do I buy?</summary>
-
-<p>Click Buy Now and complete payment.</p>
-
-</details>
-
-<details>
-
-<summary>Instant Download?</summary>
-
-<p>Yes after payment.</p>
-
-</details>
-
-<details>
-
-<summary>Mobile Friendly?</summary>
-
-<p>Yes fully responsive.</p>
-
-</details>
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h1 class="title">Contact</h1>
-
-<div class="contact">
-
-<div>
-
-<h2>Get In Touch</h2>
-
-<p>Email: info@ebook.com</p>
-
-<p>Phone: +252 000000000</p>
-
-<p>Address: Somalia</p>
-
-</div>
-
-<div>
-
-<input placeholder="Your Name">
-
-<input placeholder="Email">
-
-<textarea placeholder="Message"></textarea>
-
-<button class="send" onclick="sendMessage()">Send Message</button>
-
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-<h3>© 2026 EBook Business. All Rights Reserved.</h3>
-
-</footer>
-
-<script>
-
-function darkMode(){
-
-document.body.classList.toggle("dark");
-
-}
-// making some functions and roots to sellect all 
-
-function sendMessage(){
-
-alert("Message Sent Successfully!");
-
-}
-function cali (){
-    console.log("welcome to our library ");
-}
-cali();
-
-const cards=document.querySelectorAll(".card");
-
-window.addEventListener("scroll",()=>{
-
-cards.forEach(card=>{
-
-const top=card.getBoundingClientRect().top;
-
-if(top<window.innerHeight-50){
-
-card.style.opacity="1";
-card.style.transform="translateY(0px)";
-
-}else{
-
-card.style.opacity="0";
-card.style.transform="translateY(100px)";
-
-}
-
-});
-
-});
-
-cards.forEach(card=>{
-
-card.style.opacity="0";
-card.style.transition=".8s";
-
-});
-
-</script>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-badge">📚</span>
+        <span>BookVerse</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#books">Books</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="cart-pill" href="carts.html">🛒 Cart <span id="cartCount">0</span></a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Digital library · premium reads</div>
+          <h1>Build your dream library with the best e-books.</h1>
+          <p>
+            Discover modern business, design, marketing, and coding books created for readers who want
+            learning that feels clear, practical, and exciting.
+          </p>
+          <div class="cta-row">
+            <a class="primary-btn" href="#books">Browse Books</a>
+            <a class="secondary-btn" href="carts.html">View Cart</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>12K+</strong>
+              <span>Readers</span>
+            </div>
+            <div class="stat-card">
+              <strong>320+</strong>
+              <span>Books</span>
+            </div>
+            <div class="stat-card">
+              <strong>4.9/5</strong>
+              <span>Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="mini-card">
+            <strong>+2.4K</strong>
+            <span>new this month</span>
+          </div>
+
+          <div class="book-cube">
+            <div class="book-window">
+              <div class="book-cover-large"><span>📘</span></div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <strong>$29</strong>
+            <span>best bundle</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="books">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" style="background: rgba(79, 70, 229, 0.08); color: var(--primary); border-color: rgba(79, 70, 229, 0.08); margin-bottom: 12px;">Most popular</div>
+            <h2>Featured e-books</h2>
+          </div>
+          <p>From business strategy to creative growth, our featured titles are selected to help you learn faster and smarter.</p>
+        </div>
+
+        <div class="book-grid" id="bookGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" style="background: rgba(20, 184, 166, 0.08); color: var(--secondary); border-color: rgba(20, 184, 166, 0.08); margin-bottom: 12px;">Why choose us</div>
+            <h2>Made for digital readers</h2>
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="icon">⚡</div>
+            <h3>Instant access</h3>
+            <p>Download your books immediately after purchase and start learning within minutes.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="icon">🔒</div>
+            <h3>Secure checkout</h3>
+            <p>Trusted payment flow and safe digital delivery designed for a smooth buying experience.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="icon">📈</div>
+            <h3>Growth-focused</h3>
+            <p>Practical books for careers, business, design, and personal development that actually help you grow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" style="background: rgba(245, 158, 11, 0.08); color: var(--warning); border-color: rgba(245, 158, 11, 0.08); margin-bottom: 12px;">Simple pricing</div>
+            <h2>Choose your plan</h2>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="plan">
+            <h3>Starter</h3>
+            <div class="price">$19</div>
+            <div class="period">per month</div>
+            <ul>
+              <li>Access to 15+ beginner titles</li>
+              <li>Instant PDF download</li>
+              <li>Email support</li>
+            </ul>
+            <button class="ghost-btn">Get Started</button>
+          </div>
+
+          <div class="plan popular">
+            <div class="popular-badge">Popular</div>
+            <h3>Pro</h3>
+            <div class="price">$39</div>
+            <div class="period">per month</div>
+            <ul>
+              <li>Unlimited digital library</li>
+              <li>Priority access to new releases</li>
+              <li>Premium support</li>
+            </ul>
+            <button class="primary-btn" style="width: 100%;">Choose Pro</button>
+          </div>
+
+          <div class="plan">
+            <h3>Business</h3>
+            <div class="price">$79</div>
+            <div class="period">per month</div>
+            <ul>
+              <li>Team access for up to 10 users</li>
+              <li>Custom business resources</li>
+              <li>Dedicated onboarding</li>
+            </ul>
+            <button class="ghost-btn">Talk to Sales</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" style="background: rgba(16, 185, 129, 0.08); color: var(--success); border-color: rgba(16, 185, 129, 0.08); margin-bottom: 12px;">Testimonials</div>
+            <h2>Loved by readers</h2>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“The books are beautifully organized and super practical. I finished my first business guide in one weekend.”</p>
+            <div class="person">
+              <div class="avatar">A</div>
+              <div>
+                <strong>Ahmed</strong>
+                <span>Entrepreneur</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“The design is modern, the content is clear, and everything feels premium from browsing to checkout.”</p>
+            <div class="person">
+              <div class="avatar">F</div>
+              <div>
+                <strong>Fatima</strong>
+                <span>Designer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“I found actionable coding books that helped me build better projects and boost my confidence.”</p>
+            <div class="person">
+              <div class="avatar">M</div>
+              <div>
+                <strong>Mohamed</strong>
+                <span>Developer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-info">
+            <div class="eyebrow" style="background: rgba(255, 255, 255, 0.12); border-color: rgba(255,255,255,0.12); color: white;">Contact us</div>
+            <h3>Let’s build your reading habit.</h3>
+            <p>Need help choosing a book or starting your digital library? Our team is ready to guide you.</p>
+            <div class="contact-list">
+              <div>📧 hello@bookverse.com</div>
+              <div>📞 +252 61 000 0000</div>
+              <div>📍 Mogadishu, Somalia</div>
+            </div>
+          </div>
+
+          <form class="contact-form">
+            <div class="field-grid">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input id="subject" type="text" placeholder="Book recommendation" />
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" rows="6" placeholder="Tell us what you want to read"></textarea>
+            </div>
+
+            <button type="button" class="purchase-btn" id="sendMessageBtn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 BookVerse. All rights reserved.</div>
+  </footer>
+
+  <div class="toast" id="toast">Added to cart</div>
+
+  <script>
+    const products = [
+      { id: 1, name: 'JavaScript Mastery', author: 'A. Noor', category: 'Development', price: 24, emoji: '📘' },
+      { id: 2, name: 'Modern Design Thinking', author: 'S. Ali', category: 'Design', price: 19, emoji: '🎨' },
+      { id: 3, name: 'Business Growth Blueprint', author: 'M. Yusuf', category: 'Business', price: 27, emoji: '📈' },
+      { id: 4, name: 'Marketing in 2026', author: 'N. Hassan', category: 'Marketing', price: 22, emoji: '📣' },
+      { id: 5, name: 'Python for Beginners', author: 'H. Farah', category: 'Coding', price: 26, emoji: '🐍' },
+      { id: 6, name: 'Creative Writing Lab', author: 'R. Ahmed', category: 'Creative', price: 18, emoji: '✍️' },
+      { id: 7, name: 'UX Strategy Guide', author: 'L. Dahir', category: 'UX', price: 21, emoji: '🧠' },
+      { id: 8, name: 'Freelance Success', author: 'I. Mohamed', category: 'Career', price: 23, emoji: '💼' }
+    ];
+
+    const cartKey = 'bookVerseCart';
+    const booksGrid = document.getElementById('bookGrid');
+    const cartCount = document.getElementById('cartCount');
+    const toast = document.getElementById('toast');
+    const themeToggle = document.getElementById('themeToggle');
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem(cartKey)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCart(items) {
+      localStorage.setItem(cartKey, JSON.stringify(items));
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      const total = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCount.textContent = total;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timeoutId);
+      showToast.timeoutId = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    function addToCart(id) {
+      const cart = getCart();
+      const book = products.find(item => item.id === id);
+      if (!book) return;
+
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...book, qty: 1 });
+      }
+
+      saveCart(cart);
+      updateCartCount();
+      showToast(`${book.name} added to cart`);
+    }
+
+    function renderBooks() {
+      booksGrid.innerHTML = products.map(product => `
+        <article class="book-card">
+          <div class="book-cover" style="background: linear-gradient(135deg, ${product.id % 2 === 0 ? '#1d4ed8, #7c3aed' : '#f59e0b, #ef4444'});">${product.emoji}</div>
+          <div class="book-body">
+            <div class="meta-row">
+              <span>${product.category}</span>
+              <span class="tag">Top pick</span>
+            </div>
+            <h3>${product.name}</h3>
+            <p>By ${product.author}. A practical guide designed to help you learn faster and apply lessons right away.</p>
+            <div class="book-footer">
+              <span class="price">$${product.price}</span>
+              <button class="buy-btn" data-id="${product.id}">Add</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('.buy-btn').forEach(button => {
+        button.addEventListener('click', () => addToCart(Number(button.dataset.id)));
+      });
+    }
+
+    const savedTheme = localStorage.getItem('bookVerseTheme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+      themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('bookVerseTheme', isDark ? 'dark' : 'light');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+
+    document.getElementById('sendMessageBtn').addEventListener('click', () => {
+      showToast('Message sent successfully');
+    });
+
+    renderBooks();
+    updateCartCount();
+  </script>
+</body>
+</html>
 
 </body>
 </html>
