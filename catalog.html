@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalog | ReadSphere</title>
+    <meta name="description" content="Browse our e-book catalog by category, topic, and author." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">R</span>
+          <span>ReadSphere</span>
+        </a>
+
+        <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="catalog.html" class="active">Catalog</a>
+          <a href="featured.html">Featured</a>
+          <a href="authors.html">Authors</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="featured.html">Top Picks</a>
+          <a class="btn btn-primary" href="contact.html">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <div class="hero-box">
+            <span class="eyebrow">Book catalog</span>
+            <h1>Explore titles that match your passion and goals.</h1>
+            <p>Search by keyword, browse by category, and discover the perfect read for your next session.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="filter-bar">
+            <div class="search-wrap">
+              <input id="book-search" type="text" placeholder="Search books, topics or authors..." aria-label="Search books" />
+            </div>
+
+            <div class="filter-pills" aria-label="Book categories">
+              <button class="pill active" data-filter="all" type="button">All</button>
+              <button class="pill" data-filter="business" type="button">Business</button>
+              <button class="pill" data-filter="fiction" type="button">Fiction</button>
+              <button class="pill" data-filter="self-growth" type="button">Self-growth</button>
+              <button class="pill" data-filter="technology" type="button">Technology</button>
+            </div>
+          </div>
+
+          <div class="book-grid">
+            <article class="book-card" data-title="The Growth Blueprint" data-category="business">
+              <div class="book-cover">GROWTH</div>
+              <div class="book-header">
+                <span class="tag">Business</span>
+                <span class="rating">★ 4.8</span>
+              </div>
+              <h3>The Growth Blueprint</h3>
+              <div class="book-meta">
+                <span>By Amina Yusuf</span>
+                <span>320 pages</span>
+              </div>
+              <p>A practical guide to building better systems, teams, and long-term business success.</p>
+              <div class="book-footer">
+                <span class="price">$19</span>
+                <a class="btn btn-primary" href="featured.html">Read More</a>
+              </div>
+            </article>
+
+            <article class="book-card" data-title="Moonlit Letters" data-category="fiction">
+              <div class="book-cover alt-1">FICTION</div>
+              <div class="book-header">
+                <span class="tag">Fiction</span>
+                <span class="rating">★ 4.9</span>
+              </div>
+              <h3>Moonlit Letters</h3>
+              <div class="book-meta">
+                <span>By Farah Ali</span>
+                <span>280 pages</span>
+              </div>
+              <p>A moving story about memory, connection, and second chances across continents.</p>
+              <div class="book-footer">
+                <span class="price">$17</span>
+                <a class="btn btn-primary" href="featured.html">Read More</a>
+              </div>
+            </article>
+
+            <article class="book-card" data-title="Daily Discipline" data-category="self-growth">
+              <div class="book-cover alt-2">DISCIPLINE</div>
+              <div class="book-header">
+                <span class="tag">Self-growth</span>
+                <span class="rating">★ 4.7</span>
+              </div>
+              <h3>Daily Discipline</h3>
+              <div class="book-meta">
+                <span>By Sami Noor</span>
+                <span>260 pages</span>
+              </div>
+              <p>Build actionable habits, strengthen focus, and create momentum in everyday life.</p>
+              <div class="book-footer">
+                <span class="price">$15</span>
+                <a class="btn btn-primary" href="featured.html">Read More</a>
+              </div>
+            </article>
+
+            <article class="book-card" data-title="Future of Work" data-category="technology">
+              <div class="book-cover alt-3">TECH</div>
+              <div class="book-header">
+                <span class="tag">Technology</span>
+                <span class="rating">★ 4.8</span>
+              </div>
+              <h3>Future of Work</h3>
+              <div class="book-meta">
+                <span>By Kaden Bell</span>
+                <span>360 pages</span>
+              </div>
+              <p>Explore how AI, automation, and digital tools are reshaping work and leadership.</p>
+              <div class="book-footer">
+                <span class="price">$21</span>
+                <a class="btn btn-primary" href="featured.html">Read More</a>
+              </div>
+            </article>
+
+            <article class="book-card" data-title="Quiet Courage" data-category="self-growth">
+              <div class="book-cover alt-4">COURAGE</div>
+              <div class="book-header">
+                <span class="tag">Self-growth</span>
+                <span class="rating">★ 4.9</span>
+              </div>
+              <h3>Quiet Courage</h3>
+              <div class="book-meta">
+                <span>By Laila Rahman</span>
+                <span>240 pages</span>
+              </div>
+              <p>A thoughtful book on resilience, confidence, and making brave personal decisions.</p>
+              <div class="book-footer">
+                <span class="price">$16</span>
+                <a class="btn btn-primary" href="featured.html">Read More</a>
+              </div>
+            </article>
+
+            <article class="book-card" data-title="The Digital Storyteller" data-category="technology">
+              <div class="book-cover alt-5">DIGITAL</div>
+              <div class="book-header">
+                <span class="tag">Technology</span>
+                <span class="rating">★ 4.6</span>
+              </div>
+              <h3>The Digital Storyteller</h3>
+              <div class="book-meta">
+                <span>By Omar H.</span>
+                <span>310 pages</span>
+              </div>
+              <p>Learn how content, media, and technology can amplify ideas and build trust.</p>
+              <div class="book-footer">
+                <span class="price">$20</span>
+                <a class="btn btn-primary" href="featured.html">Read More</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>ReadSphere</h3>
+            <p>Your digital home for ideas, stories, and practical learning.</p>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul class="footer-list">
+              <li><a href="catalog.html">Catalog</a></li>
+              <li><a href="featured.html">Featured</a></li>
+              <li><a href="authors.html">Authors</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <ul class="footer-list">
+              <li><a href="about.html">About us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="#">Privacy</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <ul class="footer-list">
+              <li>Instagram</li>
+              <li>Twitter</li>
+              <li>YouTube</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-note">© <span id="year"></span> ReadSphere. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
