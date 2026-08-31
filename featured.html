@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Featured | ReadSphere</title>
+    <meta name="description" content="Explore ReadSphere featured books and editor highlights from standout authors and trending topics." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">R</span>
+          <span>ReadSphere</span>
+        </a>
+
+        <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="catalog.html">Catalog</a>
+          <a href="featured.html" class="active">Featured</a>
+          <a href="authors.html">Authors</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="catalog.html">Browse</a>
+          <a class="btn btn-primary" href="contact.html">Join Free</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero small-hero">
+        <div class="container">
+          <div class="hero-box">
+            <span class="eyebrow">Editor’s picks</span>
+            <h1>Featured books readers keep returning to.</h1>
+            <p>Hand-picked recommendations spanning productivity, deeper thinking, and memorable stories.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container feature-spotlight">
+          <div class="spotlight-cover">
+            <div class="book-cover large-cover spotlight-book">
+              <span class="mini-tag">Featured</span>
+              <h3>Atomic Habits</h3>
+              <p>James Clear</p>
+            </div>
+          </div>
+
+          <div class="spotlight-copy">
+            <span class="eyebrow">Top recommendation</span>
+            <h2>Small actions that create lasting change.</h2>
+            <p>
+              Atomic Habits helps readers understand how tiny improvements compound into extraordinary results.
+              It is practical, motivating, and easy to apply across work, study, and personal life.
+            </p>
+            <ul class="check-list">
+              <li>Actionable strategies for building better routines</li>
+              <li>Clear explanations for sustainable personal growth</li>
+              <li>Excellent for readers seeking realistic self-improvement</li>
+            </ul>
+            <a href="catalog.html" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt-bg">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Trending picks</span>
+            <h2>Today's most recommended reads</h2>
+          </div>
+
+          <div class="book-grid">
+            <article class="book-card">
+              <div class="book-art art-5"></div>
+              <div class="book-meta">
+                <span class="tag">Inspiration</span>
+                <h3>The Alchemist</h3>
+                <p>Paulo Coelho</p>
+                <div class="rating">★★★★★ 4.9</div>
+              </div>
+            </article>
+
+            <article class="book-card">
+              <div class="book-art art-6"></div>
+              <div class="book-meta">
+                <span class="tag">Creativity</span>
+                <h3>Steal Like an Artist</h3>
+                <p>Austin Kleon</p>
+                <div class="rating">★★★★★ 4.7</div>
+              </div>
+            </article>
+
+            <article class="book-card">
+              <div class="book-art art-7"></div>
+              <div class="book-meta">
+                <span class="tag">Reflection</span>
+                <h3>Ikigai</h3>
+                <p>Héctor García</p>
+                <div class="rating">★★★★★ 4.8</div>
+              </div>
+            </article>
+
+            <article class="book-card">
+              <div class="book-art art-8"></div>
+              <div class="book-meta">
+                <span class="tag">Memoir</span>
+                <h3>Educated</h3>
+                <p>Tara Westover</p>
+                <div class="rating">★★★★★ 4.7</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>ReadSphere</h3>
+            <p>Your digital home for ideas, stories, and practical learning.</p>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul class="footer-list">
+              <li><a href="catalog.html">Catalog</a></li>
+              <li><a href="featured.html">Featured</a></li>
+              <li><a href="authors.html">Authors</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <ul class="footer-list">
+              <li><a href="about.html">About us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="#">Privacy</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <ul class="footer-list">
+              <li>Instagram</li>
+              <li>Twitter</li>
+              <li>YouTube</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-note">© <span id="year"></span> ReadSphere. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
