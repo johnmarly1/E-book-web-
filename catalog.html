@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalog | ReadSphere</title>
+    <meta name="description" content="Browse the full ReadSphere book catalog across fiction, business, education, and self-growth." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">R</span>
+          <span>ReadSphere</span>
+        </a>
+
+        <button class="menu-toggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="catalog.html" class="active">Catalog</a>
+          <a href="featured.html">Featured</a>
+          <a href="authors.html">Authors</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="featured.html">Featured Picks</a>
+          <a class="btn btn-primary" href="contact.html">Join Free</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero small-hero">
+        <div class="container">
+          <div class="hero-box">
+            <span class="eyebrow">Book catalog</span>
+            <h1>Find your next favorite title.</h1>
+            <p>Discover powerful reads across professional growth, fiction, creativity, and education.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container catalog-toolbar">
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="fiction">Fiction</button>
+            <button class="filter-btn" data-filter="business">Business</button>
+            <button class="filter-btn" data-filter="self-growth">Self Growth</button>
+            <button class="filter-btn" data-filter="education">Education</button>
+          </div>
+
+          <div class="search-box">
+            <input type="text" placeholder="Search books, authors, topics..." aria-label="Search books" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="book-grid catalog-grid">
+            <article class="book-card" data-category="self-growth">
+              <div class="book-art art-1"></div>
+              <div class="book-meta">
+                <span class="tag">Self Growth</span>
+                <h3>Atomic Habits</h3>
+                <p>James Clear</p>
+                <div class="rating">★★★★★ 4.9</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="fiction">
+              <div class="book-art art-2"></div>
+              <div class="book-meta">
+                <span class="tag">Fiction</span>
+                <h3>To Kill a Mockingbird</h3>
+                <p>Harper Lee</p>
+                <div class="rating">★★★★★ 4.8</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="business">
+              <div class="book-art art-3"></div>
+              <div class="book-meta">
+                <span class="tag">Business</span>
+                <h3>Deep Work</h3>
+                <p>Cal Newport</p>
+                <div class="rating">★★★★★ 4.7</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="education">
+              <div class="book-art art-4"></div>
+              <div class="book-meta">
+                <span class="tag">Education</span>
+                <h3>Thinking, Fast and Slow</h3>
+                <p>Daniel Kahneman</p>
+                <div class="rating">★★★★★ 4.8</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="fiction">
+              <div class="book-art art-5"></div>
+              <div class="book-meta">
+                <span class="tag">Fiction</span>
+                <h3>The Alchemist</h3>
+                <p>Paulo Coelho</p>
+                <div class="rating">★★★★★ 4.9</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="business">
+              <div class="book-art art-6"></div>
+              <div class="book-meta">
+                <span class="tag">Business</span>
+                <h3>The Lean Startup</h3>
+                <p>Eric Ries</p>
+                <div class="rating">★★★★★ 4.6</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="self-growth">
+              <div class="book-art art-7"></div>
+              <div class="book-meta">
+                <span class="tag">Self Growth</span>
+                <h3>Ikigai</h3>
+                <p>Héctor García</p>
+                <div class="rating">★★★★★ 4.8</div>
+              </div>
+            </article>
+
+            <article class="book-card" data-category="education">
+              <div class="book-art art-8"></div>
+              <div class="book-meta">
+                <span class="tag">Education</span>
+                <h3>Educated</h3>
+                <p>Tara Westover</p>
+                <div class="rating">★★★★★ 4.7</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>ReadSphere</h3>
+            <p>Your digital home for ideas, stories, and practical learning.</p>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul class="footer-list">
+              <li><a href="catalog.html">Catalog</a></li>
+              <li><a href="featured.html">Featured</a></li>
+              <li><a href="authors.html">Authors</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <ul class="footer-list">
+              <li><a href="about.html">About us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="#">Privacy</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <ul class="footer-list">
+              <li>Instagram</li>
+              <li>Twitter</li>
+              <li>YouTube</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-note">© <span id="year"></span> ReadSphere. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
