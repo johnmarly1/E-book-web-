@@ -45,3 +45,23 @@ if (filterButtons.length) {
     searchInput.addEventListener('input', applyFilters);
   }
 }
+
+const subscribeForms = document.querySelectorAll('.subscribe-form');
+
+subscribeForms.forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const emailInput = form.querySelector('input[type="email"]');
+    const message = form.querySelector('.subscribe-message');
+
+    if (!emailInput || !message || !emailInput.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    localStorage.setItem('readSphereSubscriber', emailInput.value.trim());
+    message.textContent = 'Thanks for subscribing!';
+    form.reset();
+  });
+});
