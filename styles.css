@@ -633,7 +633,7 @@ textarea {
 }
 
 .footer-grid {
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 0.9fr 0.9fr 0.9fr 1.5fr;
   margin-bottom: 28px;
 }
 
@@ -649,6 +649,55 @@ textarea {
   padding: 0;
   display: grid;
   gap: 10px;
+}
+
+.subscribe-form {
+  margin-top: 8px;
+}
+
+.subscribe-row {
+  display: flex;
+  gap: 8px;
+}
+
+.subscribe-row input {
+  min-width: 0;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.subscribe-row input::placeholder {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.subscribe-row .btn {
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.subscribe-message {
+  min-height: 24px;
+  margin: 8px 0 0;
+  color: #f3cb6c;
+  font-size: 0.85rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .footer-note {
